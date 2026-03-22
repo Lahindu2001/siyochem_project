@@ -50,6 +50,7 @@ CREATE TABLE feature_settings (
 INSERT INTO feature_settings (feature_name, is_enabled, description) VALUES
   ('messages', true, 'Enable/disable messages (Lab Notes)'),
   ('experiments', true, 'Enable/disable chemistry experiments'),
+  ('start_experiment', true, 'Enable/disable student ability to start/take experiments'),
   ('reaction_wall', true, 'Enable/disable reaction wall');
 
 

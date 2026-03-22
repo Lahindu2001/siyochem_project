@@ -20,6 +20,8 @@ import {
   Check,
   Save,
   Image as ImageIcon,
+  Play,
+  Lock,
 } from 'lucide-react'
 import { useAuthStore } from '@/stores/authStore'
 import axios from 'axios'
@@ -41,8 +43,10 @@ export default function TopicDetail() {
   const [isEditing, setIsEditing] = useState(false)
   const [editForm, setEditForm] = useState({ title: '', description: '', category: '', tags: '', image: '' })
   const [saving, setSaving] = useState(false)
+  const [globalFeatures, setGlobalFeatures] = useState({ experiments: true, start_experiment: true })
+  const [loadingFeatures, setLoadingFeatures] = useState(true)
 
-  // Fetch topic + posts
+  // Fetch topic + posts + global features
   useEffect(() => {
     const fetchTopic = async () => {
       try {
@@ -70,7 +74,25 @@ export default function TopicDetail() {
         setLoading(false)
       }
     }
+
+    const fetchGlobalFeatures = async () => {
+      try {
+        setLoadingFeatures(true)
+        const { data } = await axios.get('/api/features/status')
+        if (data.features) {
+          setGlobalFeatures(data.features)
+        }
+      } catch (err) {
+        console.error('Failed to fetch global features:', err)
+        // Default to enabled if fetch fails
+        setGlobalFeatures({ experiments: true, start_experiment: true, messages: true, reaction_wall: true })
+      } finally {
+        setLoadingFeatures(false)
+      }
+    }
+
     fetchTopic()
+    fetchGlobalFeatures()
   }, [id])
 
   // Handle topic like
@@ -489,6 +511,43 @@ export default function TopicDetail() {
               <Eye className="w-5 h-5" />
               <span className="text-sm">{topic.views || 0}</span>
             </div>
+
+            {/* Separator */}
+            <div className="h-6 w-px bg-white/10"></div>
+
+            {/* Start Experiment Button */}
+            {loadingFeatures ? (
+              <Loader2 className="w-5 h-5 text-gray-400 animate-spin" />
+            ) : (
+              <motion.button
+                whileTap={{ scale: globalFeatures?.start_experiment && globalFeatures?.experiments ? 0.95 : 1 }}
+                disabled={!globalFeatures?.start_experiment || !globalFeatures?.experiments}
+                title={
+                  !globalFeatures?.start_experiment
+                    ? 'Teacher has disabled Start Experiment feature'
+                    : !globalFeatures?.experiments
+                    ? 'Teacher has disabled Design Experiment feature'
+                    : 'Start participating in this experiment'
+                }
+                onClick={() => {
+                  if (globalFeatures?.start_experiment && globalFeatures?.experiments) {
+                    router.push(`/quizzes?topic=${id}`)
+                  }
+                }}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 border ${
+                  globalFeatures?.start_experiment && globalFeatures?.experiments
+                    ? 'text-blue-400 border-blue-500/30 hover:border-blue-500/50 hover:bg-blue-500/10 cursor-pointer'
+                    : 'text-gray-500 border-gray-500/30 cursor-not-allowed opacity-60'
+                }`}
+              >
+                {globalFeatures?.start_experiment && globalFeatures?.experiments ? (
+                  <Play className="w-4 h-4" />
+                ) : (
+                  <Lock className="w-4 h-4" />
+                )}
+                <span className="text-sm">Start Experiment</span>
+              </motion.button>
+            )}
           </div>
         </div>
       </motion.div>

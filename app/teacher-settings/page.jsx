@@ -24,6 +24,7 @@ export default function TeacherSettings() {
   const [features, setFeatures] = useState({
     messages: true,
     experiments: true,
+    start_experiment: true,
     reaction_wall: true,
   })
 
@@ -118,6 +119,12 @@ export default function TeacherSettings() {
       key: 'experiments',
       name: 'Design Experiment',
       description: 'Create and manage chemistry experiments/quizzes',
+      icon: PlusCircle,
+    },
+    {
+      key: 'start_experiment',
+      name: 'Start Experiment',
+      description: 'Allow students to start and take lab tests',
       icon: PlusCircle,
     },
     {
