@@ -670,29 +670,28 @@ export default function Dashboard() {
               transition={{ delay: index * 0.1 }}
               whileHover={{ scale: 1.05 }}
             >
-              <button
-                onClick={() => handleCardClick(card.id)}
-                className={`w-full glass-card p-6 rounded-xl border ${card.borderColor} ${card.bgColor} cursor-pointer h-full flex flex-col items-center justify-center text-center hover:shadow-lg transition-all duration-300`}
-              >
-                {/* Icon */}
-                <div className={`p-3 rounded-lg ${card.bgColor} mb-4`}>
-                  <Icon className={`w-8 h-8 ${card.iconColor}`} />
-                </div>
+              <Link href={card.href}>
+                <div className={`w-full glass-card p-6 rounded-xl border ${card.borderColor} ${card.bgColor} cursor-pointer h-full flex flex-col items-center justify-center text-center hover:shadow-lg transition-all duration-300`}>
+                  {/* Icon */}
+                  <div className={`p-3 rounded-lg ${card.bgColor} mb-4`}>
+                    <Icon className={`w-8 h-8 ${card.iconColor}`} />
+                  </div>
 
-                {/* Title */}
-                <h3 className="text-lg font-bold text-white mb-2">{card.title}</h3>
+                  {/* Title */}
+                  <h3 className="text-lg font-bold text-white mb-2">{card.title}</h3>
 
-                {/* Count Badge */}
-                <div className={`text-2xl font-bold bg-gradient-to-r ${card.color} bg-clip-text text-transparent mb-3`}>
-                  {card.count}
-                </div>
+                  {/* Count Badge */}
+                  <div className={`text-2xl font-bold bg-gradient-to-r ${card.color} bg-clip-text text-transparent mb-3`}>
+                    {card.count}
+                  </div>
 
-                {/* View Details Link */}
-                <div className="flex items-center gap-1 text-sm text-gray-300 hover:text-white transition-colors mt-auto">
-                  <span>View Details</span>
-                  <ChevronRight className="w-4 h-4" />
+                  {/* View Details Link */}
+                  <div className="flex items-center gap-1 text-sm text-gray-300 hover:text-white transition-colors mt-auto">
+                    <span>View Details</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </div>
                 </div>
-              </button>
+              </Link>
             </motion.div>
           )
         })}

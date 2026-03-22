@@ -336,7 +336,7 @@ export default function CreateTopic() {
             </div>
 
             {/* Cover Image */}
-            <div className="glass-card p-6 rounded-xl">
+            <div className="glass-card p-6 rounded-xl hidden">
               <label className="text-white font-medium mb-3 block">
                 <Image className="w-4 h-4 inline mr-2" />
                 Cover Image <span className="text-gray-500 text-sm font-normal">(optional)</span>

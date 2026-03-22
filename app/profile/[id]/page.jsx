@@ -1199,34 +1199,36 @@ export default function Profile() {
                 )}
               </div>
 
-              {/* Learning Achievement Summary */}
-              <div className="glass-card p-6 rounded-xl md:col-span-2">
-                <h3 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
-                  <Award className="w-5 h-5 text-yellow-400" /> Learning Journey
-                </h3>
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                  <div className="bg-white/5 rounded-lg p-4 text-center">
-                    <p className="text-2xl font-bold text-green-400">{user.topicCount || 0}</p>
-                    <p className="text-xs text-gray-400 mt-2">Experiments Created</p>
-                  </div>
-                  <div className="bg-white/5 rounded-lg p-4 text-center">
-                    <p className="text-2xl font-bold text-blue-400">{user.stats?.postsCount || 0}</p>
-                    <p className="text-xs text-gray-400 mt-2">Reactions Posted</p>
-                  </div>
-                  <div className="bg-white/5 rounded-lg p-4 text-center">
-                    <p className="text-2xl font-bold text-purple-400">{user.stats?.quizzesTaken || 0}</p>
-                    <p className="text-xs text-gray-400 mt-2">Lab Tests Taken</p>
-                  </div>
-                  <div className="bg-white/5 rounded-lg p-4 text-center">
-                    <p className="text-2xl font-bold text-yellow-400">{user.stats?.averageScore || 0}%</p>
-                    <p className="text-xs text-gray-400 mt-2">Average Score</p>
-                  </div>
-                  <div className="bg-white/5 rounded-lg p-4 text-center">
-                    <p className="text-2xl font-bold text-red-400">{user.stats?.likesReceived || 0}</p>
-                    <p className="text-xs text-gray-400 mt-2">Reactions Received</p>
+              {/* Learning Achievement Summary — only show if user has achievements */}
+              {(user.topicCount > 0 || user.stats?.postsCount > 0 || user.stats?.quizzesTaken > 0 || user.stats?.likesReceived > 0) && (
+                <div className="glass-card p-6 rounded-xl md:col-span-2">
+                  <h3 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+                    <Award className="w-5 h-5 text-yellow-400" /> Learning Journey
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    <div className="bg-white/5 rounded-lg p-4 text-center">
+                      <p className="text-2xl font-bold text-green-400">{user.topicCount || 0}</p>
+                      <p className="text-xs text-gray-400 mt-2">Experiments Created</p>
+                    </div>
+                    <div className="bg-white/5 rounded-lg p-4 text-center">
+                      <p className="text-2xl font-bold text-blue-400">{user.stats?.postsCount || 0}</p>
+                      <p className="text-xs text-gray-400 mt-2">Reactions Posted</p>
+                    </div>
+                    <div className="bg-white/5 rounded-lg p-4 text-center">
+                      <p className="text-2xl font-bold text-purple-400">{user.stats?.quizzesTaken || 0}</p>
+                      <p className="text-xs text-gray-400 mt-2">Lab Tests Taken</p>
+                    </div>
+                    <div className="bg-white/5 rounded-lg p-4 text-center">
+                      <p className="text-2xl font-bold text-yellow-400">{user.stats?.averageScore || 0}%</p>
+                      <p className="text-xs text-gray-400 mt-2">Average Score</p>
+                    </div>
+                    <div className="bg-white/5 rounded-lg p-4 text-center">
+                      <p className="text-2xl font-bold text-red-400">{user.stats?.likesReceived || 0}</p>
+                      <p className="text-xs text-gray-400 mt-2">Reactions Received</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
