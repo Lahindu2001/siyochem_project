@@ -5,6 +5,7 @@ import { requireAuth, extractToken, verifyToken } from '@/lib/auth'
 export const dynamic = 'force-dynamic'
 
 // GET /api/users/[id]
+// Fetch by UUID id
 export async function GET(request, { params }) {
   try {
     const sql = getSQL()
