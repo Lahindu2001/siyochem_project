@@ -223,12 +223,12 @@ function MessagesContent() {
 
   const getAvatarColor = (name = 'U') => {
     const colors = [
-      'from-blue-500 to-cyan-500',
-      'from-purple-500 to-pink-500',
-      'from-green-500 to-emerald-500',
-      'from-orange-500 to-amber-500',
-      'from-red-500 to-rose-500',
-      'from-indigo-500 to-violet-500',
+      'from-primary-500 to-primary-600',
+      'from-accent-500 to-accent-600',
+      'from-tertiary-500 to-tertiary-600',
+      'from-primary-600 to-accent-500',
+      'from-accent-500 to-tertiary-500',
+      'from-tertiary-500 to-primary-600',
     ]
     let hash = 0
     for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash)

@@ -109,6 +109,32 @@ const Navbar = () => {
 
   return (
     <>
+      {/* Notification banner for students - always visible */}
+      {isAuthenticated && user?.role === 'student' && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-gradient-to-r from-primary-500 to-primary-600 border-b border-primary-400/50 px-4 py-3 sticky top-0 z-50"
+        >
+          <div className="flex items-center justify-center gap-3">
+            <input
+              type="checkbox"
+              checked={assessmentChecked}
+              onChange={(e) => setAssessmentChecked(e.target.checked)}
+              className="w-5 h-5 rounded cursor-pointer"
+            />
+            <div className="text-center flex-1">
+              <p className="text-white font-semibold text-lg flex items-center justify-center gap-2">
+                📝 <span>Complete your assessment</span>
+              </p>
+              <p className="text-primary-100 text-sm mt-1">
+                The following are now available: Lab Tests
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
       <nav className="glass-morphism sticky top-0 z-50 border-b border-white/10">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
@@ -237,7 +263,7 @@ const Navbar = () => {
                             {user?.profile?.firstName} {user?.profile?.lastName}
                           </p>
                           <p className="text-gray-400 text-sm">{user?.email}</p>
-                          <p className="text-primary-400 text-xs mt-1 capitalize">{user?.role}</p>
+                          <p className="text-accent-400 text-xs mt-1 capitalize">{user?.role}</p>
                         </div>
                       </div>
 
@@ -319,7 +345,7 @@ const Navbar = () => {
 
                         <button
                           onClick={handleLogout}
-                          className="flex items-center space-x-2 w-full px-3 py-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition-all duration-200"
+                          className="flex items-center space-x-2 w-full px-3 py-2 text-tertiary-400 hover:text-tertiary-300 hover:bg-tertiary-500/10 rounded-lg transition-all duration-200"
                         >
                           <LogOut className="w-4 h-4" />
                           <span>Exit Lab</span>

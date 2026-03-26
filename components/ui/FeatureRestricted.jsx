@@ -11,10 +11,10 @@ export default function FeatureRestricted({ feature = 'This feature' }) {
         animate={{ opacity: 1, y: 0 }}
         className="max-w-md w-full"
       >
-        <div className="glass-card rounded-2xl p-8 text-center border border-amber-500/20 bg-amber-500/5">
+        <div className="glass-card rounded-2xl p-8 text-center border border-accent-500/20 bg-accent-500/5">
           {/* Icon */}
-          <div className="w-16 h-16 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Lock className="w-8 h-8 text-amber-400" />
+          <div className="w-16 h-16 bg-accent-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Lock className="w-8 h-8 text-accent-400" />
           </div>
 
           {/* Message */}

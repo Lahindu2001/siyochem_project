@@ -67,14 +67,15 @@ export default function ReactionPage() {
     }
   }, [authLoading, isAuthenticated])
 
+  // Fetch reactions
+  useEffect(() => {
+    fetchReactions()
+  }, [])
+
   // Show restricted message for students if feature is disabled
   if (!authLoading && isAuthenticated && user?.role === 'student' && !featureEnabled) {
     return <FeatureRestricted feature="Reaction Wall" />
   }
-
-  useEffect(() => {
-    fetchReactions()
-  }, [])
 
   const fetchReactions = async () => {
     try {
